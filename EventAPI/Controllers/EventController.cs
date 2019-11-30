@@ -38,7 +38,8 @@ namespace EventAPI.Controllers
 
             var schema = new Schema()
             {
-                Query = new EventQuery()
+                Query = new EventQuery(),
+                Mutation = new EventMutation()
             };
 
             var result = await new DocumentExecuter().ExecuteAsync(_ =>
@@ -47,6 +48,7 @@ namespace EventAPI.Controllers
                 _.Query = query.Query;
                 _.OperationName = query.OperationName;
                 _.Inputs = inputs;
+                _.ExposeExceptions = true;
             }).ConfigureAwait(false);
 
             if (result.Errors?.Count > 0)

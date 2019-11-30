@@ -7,7 +7,6 @@ namespace EventAPI.Model
     {
         public string Id { get; set; }
         public string HostId { get; set; }
-
         public bool IsPublicEvent { get; set; }
         public bool IsOrganized { get; set; }
         public EventActivity[] EventActivity { get; set; }
@@ -19,7 +18,7 @@ namespace EventAPI.Model
         public DateTime EventEnd { get; set; }
         public List<string> Attendees { get; set; }
         //public byte[] images { get; set; }
-        //public Map map { get; set; }
+        public Map Map { get; set; }
     }
     public enum EventActivity
     {
