@@ -1,3 +1,4 @@
+using GraphiQl;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +21,7 @@ namespace UserAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,6 +31,8 @@ namespace UserAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseGraphiQl("/api/users", "/api/users");
 
             app.UseHttpsRedirection();
 

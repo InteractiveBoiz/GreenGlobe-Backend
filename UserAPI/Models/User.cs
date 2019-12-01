@@ -7,13 +7,13 @@ namespace UserAPI.Models
     {
         public string Id { get; set; }
         public UserType UserType { get; set; }
-        public Boolean IsVerified { get; set; }
-        public String Email { get; set; }
-        public String Username { get; set; }
-        public String Password { get; set; }
+        public bool IsVerified { get; set; }
+        public string Email { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
         //public Byte ProfilePicture { get; set; }
-        public List<String> FriendsList { get; set; }
-        public List<String> GroupsList { get; set; }
+        public List<string> FriendsList { get; set; }
+        public List<string> GroupsList { get; set; }
     }
 
     public enum UserType
