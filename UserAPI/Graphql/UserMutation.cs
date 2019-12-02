@@ -29,6 +29,49 @@ namespace UserAPI.Graphql
                         return userObj;
                     }
                 });
+            Field<Types.UserType>(
+                "updateUser",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<UserInputType>> { Name = "user", Description = "The user to be updated." },
+                    new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
+                    ),
+                resolve: context =>
+                {
+                    var id = context.GetArgument<string>("id");
+
+                    User userObj = context.GetArgument<User>("user");
+                    using (IDocumentSession session = RavenDocumentStore.Store.OpenSession())
+                    {
+                        User user = session.Load<User>(id);
+
+                        user.Email = userObj.Email;
+                        user.Username = userObj.Username;
+                        user.Password = userObj.Password;
+                        user.IsVerified = userObj.IsVerified;
+                        user.GroupsList = userObj.GroupsList;
+                        user.UserType = userObj.UserType;
+                        user.FriendsList = userObj.FriendsList;
+
+                        session.SaveChanges();
+                        return user;
+                    }
+                });
+            Field<BooleanGraphType>(
+                "deleteUser",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id", Description = "The id of the user to be deleted" }
+                    ),
+                resolve: context =>
+                {
+                    var id = context.GetArgument<string>("id");
+                    using (IDocumentSession session = RavenDocumentStore.Store.OpenSession())
+                    {
+                        session.Delete(id);
+                        session.SaveChanges();
+
+                        return true;
+                    }
+                });
         }
     }
 }

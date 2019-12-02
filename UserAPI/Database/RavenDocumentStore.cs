@@ -14,7 +14,7 @@ namespace UserAPI.Database
             IDocumentStore store = new DocumentStore()
             {
                 Urls = new[] { connString },
-                Database = "Users"
+                Database = "users"
             }.Initialize();
 
             return store;
