@@ -1,3 +1,6 @@
+using EventAPI.Graphql;
+using GraphiQl;
+using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +23,8 @@ namespace EventAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddSingleton<EventQuery>();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,6 +35,7 @@ namespace EventAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseGraphiQl("/api/event", "/api/event");
             app.UseHttpsRedirection();
 
             app.UseRouting();
