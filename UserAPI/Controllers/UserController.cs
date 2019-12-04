@@ -1,14 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GraphQL;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Raven.Client.Documents.Session;
-using UserAPI.Database;
 using UserAPI.Graphql;
-using UserAPI.Models;
 
 namespace UserAPI.Controllers
 {
@@ -23,6 +18,7 @@ namespace UserAPI.Controllers
             _logger = logger;
         }
 
+        /*
         [HttpGet]
         public IEnumerable<User> Get()
         {
@@ -35,6 +31,7 @@ namespace UserAPI.Controllers
                 return users.ToArray();
             }
         }
+        */
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] GraphQLQuery query)
@@ -53,6 +50,7 @@ namespace UserAPI.Controllers
                     _.Query = query.Query;
                     _.OperationName = query.OperationName;
                     _.Inputs = inputs;
+                    _.ExposeExceptions = true;
                 }).ConfigureAwait(false);
 
             if (result.Errors?.Count > 0)

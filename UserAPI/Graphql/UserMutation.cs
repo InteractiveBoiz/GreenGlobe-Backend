@@ -1,11 +1,8 @@
 ﻿using GraphQL.Types;
 using Raven.Client.Documents.Session;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using UserAPI.Database;
 using UserAPI.Graphql.InputTypes;
+using UserAPI.Graphql.Types;
 using UserAPI.Models;
 
 namespace UserAPI.Graphql
@@ -14,7 +11,7 @@ namespace UserAPI.Graphql
     {
         public UserMutation()
         {
-            Field<Types.UserType>(
+            Field<UserType>(
                 "createUser",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<UserInputType>> { Name = "user", Description = "The user to be created." }),
@@ -29,7 +26,7 @@ namespace UserAPI.Graphql
                         return userObj;
                     }
                 });
-            Field<Types.UserType>(
+            Field<UserType>(
                 "updateUser",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<UserInputType>> { Name = "user", Description = "The user to be updated." },
@@ -49,7 +46,7 @@ namespace UserAPI.Graphql
                         user.Password = userObj.Password;
                         user.IsVerified = userObj.IsVerified;
                         user.GroupsList = userObj.GroupsList;
-                        user.UserType = userObj.UserType;
+                        user.UserCategory = userObj.UserCategory;
                         user.FriendsList = userObj.FriendsList;
 
                         session.SaveChanges();

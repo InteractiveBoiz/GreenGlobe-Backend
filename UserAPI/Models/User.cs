@@ -6,7 +6,7 @@ namespace UserAPI.Models
     public class User
     {
         public string Id { get; set; }
-        public UserType UserType { get; set; }
+        public UserCategory UserCategory { get; set; }
         public bool IsVerified { get; set; }
         public string Email { get; set; }
         public string Username { get; set; }
@@ -16,7 +16,7 @@ namespace UserAPI.Models
         public List<string> GroupsList { get; set; }
     }
 
-    public enum UserType
+    public enum UserCategory
     {
         User = 0,
         NonUser = 1,

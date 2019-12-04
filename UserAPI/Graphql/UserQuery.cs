@@ -1,14 +1,8 @@
 ﻿using GraphQL.Types;
 using Raven.Client.Documents.Session;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UserAPI.Graphql.Types;
-using GraphQL.Types;
-using Raven.Client.Documents.Session;
-using System.Collections.Generic;
-using System.Linq;
 using UserAPI.Database;
 using UserAPI.Models;
 
@@ -18,7 +12,7 @@ namespace UserAPI.Graphql
     {
         public UserQuery()
         {
-            Field<Types.UserType>(
+            Field<UserType>(
                 "user",
                 arguments: new QueryArguments(
                     new QueryArgument<IdGraphType> { Name = "id", Description = "The ID of the user." }),
@@ -35,7 +29,7 @@ namespace UserAPI.Graphql
                     }
                 });
 
-            Field<ListGraphType<Types.UserType>>(
+            Field<ListGraphType<UserType>>(
                 "users",
                 resolve: context =>
                 {
