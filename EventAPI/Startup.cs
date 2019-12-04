@@ -24,7 +24,6 @@ namespace EventAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<EventQuery>();
-            services.AddSingleton<ISchema, EventSchema>();
             services.AddControllers().AddNewtonsoftJson();
         }
 
