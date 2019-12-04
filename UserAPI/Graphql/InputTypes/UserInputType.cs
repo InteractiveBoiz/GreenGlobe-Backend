@@ -13,9 +13,8 @@ namespace UserAPI.Graphql.InputTypes
     {
         public UserInputType()
         {
-            Name = "User";
-            Field<StringGraphType>("id");
-            Field<UserCategoryEnumType>("userType");
+            Name = "UserInput";
+            Field<UserCategoryEnumType>("userCategory");
             Field<BooleanGraphType>("isVerified");
             Field<StringGraphType>("email");
             Field<StringGraphType>("username");

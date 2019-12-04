@@ -32,8 +32,6 @@ namespace UserAPI.Controllers
             }
         }
         */
-
-        [HttpPost]
         public async Task<IActionResult> Post([FromBody] GraphQLQuery query)
         {
             var inputs = query.Variables.ToInputs();

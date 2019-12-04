@@ -11,26 +11,28 @@ namespace UserAPI.Graphql
     {
         public UserMutation()
         {
-            Field<UserType>(
-                "createUser",
-                arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<UserInputType>> { Name = "user", Description = "The user to be created." }),
-                resolve: context =>
-                {
-                    var userObj = context.GetArgument<User>("user");
-                    using (IDocumentSession session = RavenDocumentStore.Store.OpenSession())  // Open a session for a default 'Database'
-                    {
-                        session.Store(userObj); 
-                        session.SaveChanges();
 
-                        return userObj;
-                    }
-                });
+            Field<UserType>(
+             "createUser",
+             arguments: new QueryArguments(
+               new QueryArgument<NonNullGraphType<UserInputType>> { Name = "user" }
+             ),
+             resolve: context =>
+             {
+                 var userObj = context.GetArgument<User>("user");
+                 using (IDocumentSession session = RavenDocumentStore.Store.OpenSession())  // Open a session for a default 'Database'
+                  {
+                     session.Store(userObj);
+                     session.SaveChanges();
+
+                     return userObj;
+                 }
+             });
             Field<UserType>(
                 "updateUser",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<UserInputType>> { Name = "user", Description = "The user to be updated." },
-                    new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
+                    new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id", Description = "The user to be updated." },
+                    new QueryArgument<NonNullGraphType<UserInputType>> { Name = "user" }
                     ),
                 resolve: context =>
                 {
