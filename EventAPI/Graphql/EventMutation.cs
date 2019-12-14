@@ -83,6 +83,38 @@ namespace EventAPI.Graphql
                       return true;
                   }
               });
+            Field<EventType>(
+              "attendEvent",
+              arguments: new QueryArguments(
+                new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "userId", Description = "The ID of the user." },
+                new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "eventId", Description = "The ID of the event." }
+              ),
+              resolve: context =>
+              {
+                  var userId = context.GetArgument<string>("userId");
+                  var eventId = context.GetArgument<string>("eventId");
+
+                  using (IDocumentSession session = RavenDocumentStore.Store.OpenSession())  // Open a session for a default 'Database'
+                  {
+                      /*Event doc = session
+                                    .Query<Event>()
+                                    .Where(x => x.Id.Equals(eventId) && !x.Attendees.Contains(userId));*/
+
+                      Event doc = session.Query<Event>()
+                                            .Where(x => x.Id.Equals(eventId) && !x.Attendees.Contains(userId))
+                                            .First();
+                      //doc.IsOrganized = eventObj.IsOrganized;
+                      if (doc.Attendees == null)
+                      {
+                          doc.Attendees = new List<string>();
+                      }
+
+                      doc.Attendees.Add(userId);
+
+                      session.SaveChanges();
+                      return doc;
+                  }
+              });
         }
     }
 }

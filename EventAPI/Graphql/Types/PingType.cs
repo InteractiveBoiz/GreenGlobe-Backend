@@ -11,8 +11,8 @@ namespace EventAPI.Graphql.Types
     {
         public PingType()
         {
-            Name = "Map";
-            Description = "An Map Created for an Event";
+            Name = "Ping";
+            Description = "An Ping Created for an Event Map";
             Field(x => x.Id).Description("The ID of the item.");
             Field(x => x.OwnerId).Description("The ID of the owner of the item.");
             Field(x => x.Position, type: typeof(ListGraphType<FloatGraphType>)).Description("The Position of the item.");
