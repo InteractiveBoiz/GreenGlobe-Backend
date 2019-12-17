@@ -15,6 +15,7 @@ namespace GroupAPI.Graphql.Types
             Field(x => x.Name, type: typeof(StringGraphType)).Description("The Name of the Group.");
             Field(x => x.Description, type: typeof(StringGraphType)).Description("The Description of the Group.");
             Field(x => x.Members, type: typeof(ListGraphType<StringGraphType>)).Description("The List of Group Members.");
+            Field(x => x.ChatId, type: typeof(StringGraphType)).Description("The List of Group Members.");
         }
     }
 }

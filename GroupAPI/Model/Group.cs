@@ -13,5 +13,6 @@ namespace GroupAPI.Model
         public string Name { get; set; }
         public string Description { get; set; }
         public List<string> Members { get; set; }
+        public string ChatId { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace GroupAPI.Graphql.InputTypes
             Field<StringGraphType>("name");
             Field<StringGraphType>("description");
             Field<ListGraphType<StringGraphType>>("members");
+            Field<StringGraphType>("chatId");
         }
     }
 }
