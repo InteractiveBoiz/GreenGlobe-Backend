@@ -19,6 +19,8 @@ namespace EventAPI.Model
         public List<string> Attendees { get; set; }
         //public byte[] images { get; set; }
         public Map Map { get; set; }
+
+        public string ChatId { get; set; }
     }
     public enum EventActivity
     {

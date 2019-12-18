@@ -62,6 +62,7 @@ namespace EventAPI.Graphql
                       doc.EventEnd = eventObj.EventEnd;
                       doc.Attendees = eventObj.Attendees;
                       doc.Map = eventObj.Map;
+                      doc.ChatId = eventObj.ChatId;
 
                       session.SaveChanges();
                     return doc;
