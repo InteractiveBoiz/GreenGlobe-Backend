@@ -1,4 +1,5 @@
-﻿using GraphQL.Types;
+﻿using EventAPI.Graphql.Types;
+using GraphQL.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,9 @@ namespace EventAPI.Graphql.InputTypes
         public MapInputType()
         {
             Name = "MapInput";
-            Field<ListGraphType<FloatGraphType>>("meetUpPosition");
-            Field<ListGraphType<FloatGraphType>>("areaOfInterest");
+            Field<GeoCoordinateInputType>("meetUpPosition");
+            Field<ListGraphType<GeoCoordinateInputType>>("areaOfInterest");
+            Field<GeoCoordinateInputType>("exitPosition"); 
             Field<ListGraphType<PingInputType>>("pings");
         }
     }

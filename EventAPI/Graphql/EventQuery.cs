@@ -41,6 +41,42 @@ namespace EventAPI.Graphql
                         return events;
                     }
                 });
+            Field<ListGraphType<EventType>>(
+                "attendingEvents",
+                arguments: new QueryArguments(
+                    new QueryArgument<IdGraphType> { Name = "userId", Description = "The ID of the event." }
+                ),
+                resolve: context =>
+                {
+                    var userId = context.GetArgument<string>("userId");
+
+                    using (IDocumentSession session = RavenDocumentStore.Store.OpenSession())  // Open a session for a default 'Database'
+                    {
+                        List<Event> docs = session.Query<Event>()
+                                              .Where(x => x.Attendees.Contains(userId))
+                                              .ToList();
+
+                        return docs;
+                    }
+                });
+            Field<ListGraphType<EventType>>(
+                "hostingEvents",
+                arguments: new QueryArguments(
+                    new QueryArgument<IdGraphType> { Name = "userId", Description = "The ID of the event." }
+                ),
+                resolve: context =>
+                {
+                    var userId = context.GetArgument<string>("userId");
+
+                    using (IDocumentSession session = RavenDocumentStore.Store.OpenSession())  // Open a session for a default 'Database'
+                    {
+                        List<Event> docs = session.Query<Event>()
+                                              .Where(x => x.HostId.Equals(userId))
+                                              .ToList();
+
+                        return docs;
+                    }
+                });
         }
             
     }

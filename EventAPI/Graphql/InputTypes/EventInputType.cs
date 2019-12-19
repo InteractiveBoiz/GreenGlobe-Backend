@@ -22,6 +22,7 @@ namespace EventAPI.Graphql.Types
             Field<DateGraphType>("eventEnd");
             Field<ListGraphType<StringGraphType>>("attendees");
             Field<MapInputType>("map");
+            Field<StringGraphType>("chatId");
         }
     }
 }

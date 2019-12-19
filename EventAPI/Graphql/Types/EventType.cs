@@ -21,6 +21,8 @@ namespace EventAPI.Graphql.Types
             Field(x => x.EventCreated, type: typeof(DateGraphType)).Description("The Date of when the Event was created.");
             Field(x => x.EventEnd, type: typeof(DateGraphType)).Description("The Date of when the Event ends.");
             Field(x => x.Attendees, type: typeof(ListGraphType<StringGraphType>)).Description("The IDs of the attendees to the event.");
+            Field(x => x.Map, type: typeof(MapType)).Description("The Map of the event.");
+            Field(x => x.ChatId, type: typeof(StringGraphType)).Description("The ChatId of the event.");
         }
     }
 }
