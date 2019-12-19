@@ -42,6 +42,26 @@ namespace UserAPI.Graphql
                         return users;
                     }
                 });
+
+            Field<UserType>(
+                "userLogin",
+                arguments: new QueryArguments(
+                    new QueryArgument<StringGraphType> { Name = "username", Description = "The username of the user." },
+                    new QueryArgument<StringGraphType> { Name = "password", Description = "The password of the user." }),
+                resolve: context =>
+                {
+                    var username = context.GetArgument<string>("username");
+                    var password = context.GetArgument<string>("password");
+
+                    using (IDocumentSession session = RavenDocumentStore.Store.OpenSession())  // Open a session for a default 'Database'
+                    {
+                        //EnsureDatabaseExists.DatabaseExists(RavenDocumentStore.Store, "Scores");
+                        User doc = session.Query<User>()
+                                            .Where(x => x.Username.Equals(username) && x.Password.Equals(password))
+                                            .First();
+                        return doc;
+                    }
+                });
         }
     }
         
