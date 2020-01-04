@@ -29,6 +29,7 @@ namespace ChatAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson();
+            services.AddConsulConfig(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +46,7 @@ namespace ChatAPI
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseConsul();
 
             app.UseEndpoints(endpoints =>
             {
