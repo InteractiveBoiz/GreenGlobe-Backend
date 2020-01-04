@@ -41,7 +41,7 @@ namespace ChatAPI
             }
 
             app.UseGraphiQl("/api/chat", "/api/chat");
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -52,6 +52,7 @@ namespace ChatAPI
             {
                 endpoints.MapControllers();
             });
+            app.UseMvc();
         }
     }
 }

@@ -37,7 +37,7 @@ namespace EventAPI
             }
 
             app.UseGraphiQl("/api/event", "/api/event");
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -48,6 +48,7 @@ namespace EventAPI
             {
                 endpoints.MapControllers();
             });
+            app.UseMvc();
         }
     }
 }
