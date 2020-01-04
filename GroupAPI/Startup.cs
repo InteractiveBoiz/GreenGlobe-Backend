@@ -41,7 +41,7 @@ namespace GroupAPI
             }
 
             app.UseGraphiQl("/api/groups", "/api/groups");
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

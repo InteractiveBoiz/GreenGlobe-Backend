@@ -24,7 +24,7 @@ namespace EventAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<EventQuery>();
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers(option => option.EnableEndpointRouting = false).AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,7 +36,7 @@ namespace EventAPI
             }
 
             app.UseGraphiQl("/api/event", "/api/event");
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -46,6 +46,7 @@ namespace EventAPI
             {
                 endpoints.MapControllers();
             });
+            app.UseMvc();
         }
     }
 }
