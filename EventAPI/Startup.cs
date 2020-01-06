@@ -48,7 +48,7 @@ namespace EventAPI
             {
                 endpoints.MapControllers();
             });
-            app.UseMvc();
+            //app.UseMvc();
         }
     }
 }

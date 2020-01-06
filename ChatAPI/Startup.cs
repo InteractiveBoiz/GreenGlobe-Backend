@@ -52,7 +52,7 @@ namespace ChatAPI
             {
                 endpoints.MapControllers();
             });
-            app.UseMvc();
+            //app.UseMvc();
         }
     }
 }

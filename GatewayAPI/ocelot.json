@@ -1,40 +1,65 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/api/chat",
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/chat/",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5001
-        }
-      ],
-      "UpstreamPathTemplate": "/chat-api/"
+      "ServiceName": "ChatService",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "UpstreamPathTemplate": "/chat-api/",
+      "DelegatingHandlers": [
+        "GraphQlDelegatingHandler"
+      ]
     },
     {
+      "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/event/",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5002
-        }
-      ],
+      "ServiceName": "EventService",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
       "UpstreamPathTemplate": "/event-api/",
       "DelegatingHandlers": [
         "GraphQlDelegatingHandler"
       ]
     },
     {
-      "DownstreamPathTemplate": "/api/{everything}",
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/groups/",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5003
-        }
-      ],
-      "UpstreamPathTemplate": "/groups-api/{everything}"
+      "ServiceName": "GroupService",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "UpstreamPathTemplate": "/groups-api/",
+      "DelegatingHandlers": [
+        "GraphQlDelegatingHandler"
+      ]
+    },
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/users/",
+      "DownstreamScheme": "http",
+      "ServiceName": "UserService",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "UpstreamPathTemplate": "/user-api/",
+      "DelegatingHandlers": [
+        "GraphQlDelegatingHandler"
+      ]
     }
-  ]
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5005",
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "PollConsul",
+      "PollingInterval": 500
+    }
+  }
 }
