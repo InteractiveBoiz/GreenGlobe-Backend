@@ -1,0 +1,60 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/chat/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/chat-api/",
+      "DelegatingHandlers": [
+        "GraphQlDelegatingHandler"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/event/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/event-api/",
+      "DelegatingHandlers": [
+        "GraphQlDelegatingHandler"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/groups/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "https://groupapi220200107011039.azurewebsites.net",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/groups-api/",
+      "DelegatingHandlers": [
+        "GraphQlDelegatingHandler"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/user-api/",
+      "DelegatingHandlers": [
+        "GraphQlDelegatingHandler"
+      ]
+    }
+  ]
+}
